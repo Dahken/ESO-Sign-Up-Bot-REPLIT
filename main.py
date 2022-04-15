@@ -7,7 +7,7 @@ import datatransaction
 import sqlite3
 import datetime
 
-bot = commands.Bot(command_prefix="!", case_insensitive=True)
+bot = commands.Bot(command_prefix="*", case_insensitive=True)
 bot.author_id = 533777500699099156  # Change to your discord id!!!
 
 
@@ -26,6 +26,7 @@ async def showtrial(ctx):
     myEmbed = datatransaction.read_event(channel_id)
     #await ctx.send(f"A new channel called {channel_name} was made")
     await ctx.channel.send(embed=myEmbed)
+
 
 #deploy note
 #event wizard
