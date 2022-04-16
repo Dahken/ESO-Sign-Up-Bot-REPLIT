@@ -8,7 +8,7 @@ def read_roster(channel_id):
       print("Connected to SQLite for status read")
 
       c.execute('select * from signup where channel_id=? order by role desc',[channel_id])
-      #c.execute(sql_query)
+
       records = c.fetchall()
 
       print("Total rows are:  ", len(records))
@@ -22,20 +22,6 @@ def read_roster(channel_id):
         roles = ''
         messages = ''
         row = ''
-        # for x in records:
-        #   names += x[2] + '\n'
-        #   if x[6] =='DPS':
-        #     roles += str('⚔️') + '\n'
-        #   if x[6] =='HEALER':
-        #     roles += str('🚑') + '\n'
-        #   if x[6] =='TANK':
-        #     roles += str('🛡️') + '\n'
-        #   if x[6] =='ALT':
-        #     roles += str('🎲') + '\n'
-        #   if x[7] is None:
-        #     messages += '-'  + '\n'
-        #   if x[7] is not None:
-        #     messages += x[7] + '\n'
         slug=''
         for x in records:
           row=''
@@ -68,21 +54,6 @@ def read_roster(channel_id):
           print(x[5])
           print(x[6])
           print(x[7])
-          # myEmbed.addFields
-          # (
-          #   {name= "Regular field title", value= "Some value here"} ,
-          #   { name= '\u200B', value: '\u200B' },
-          #   { name= 'Inline field title', value= 'Some value here', inline: true },
-          #   { name= 'Inline field title', value= 'Some value here', inline: true },
-          # )
-        # myEmbed.add_field(name='Username', value=names, inline=True)
-        # myEmbed.add_field(name='Roles', value=str(roles), inline=True)
-        # myEmbed.add_field(name='Messages', value=messages, inline=True)
-        # myEmbed.add_field(name='\u200b', value=names, inline=True)
-        # myEmbed.add_field(name='\u200b', value=str(roles), inline=True)
-        # myEmbed.add_field(name='\u200b', value=messages, inline=True)
-        #myEmbed.add_field(name='\u200b', value=str(names+' '+roles+' '+messages), inline=True)
-        #myEmbed.add_field(name='\u200b', value=str(names+' '+roles+' '+messages), inline=True)
         myEmbed.add_field(name='\u200b', value=slug, inline=False)
       c.close()
       return myEmbed
@@ -135,10 +106,7 @@ def event_info(channel_id,message):
 
       if exists is not None:
         print("Modify Trial Entry")
-        #sql_update="""update trials set trial_desc=?;"""
         update_tuple=(msg,channel_id)
-        #c.execute(sql_update, update_tuple)
-        #c.execute('update trials set trial_desc=? where channel =?',[msg])
         c.execute('update trials set trial_desc=? where channel =?',update_tuple)
 
         connection.commit()
@@ -169,10 +137,7 @@ def roster_msg(message,channel_id,username):
 
       if exists is not None:
         print("Modify Trial Message")
-        #sql_update="""update trials set trial_desc=?;"""
         update_tuple=(msg,channel_id,username)
-        #c.execute(sql_update, update_tuple)
-        #c.execute('update trials set trial_desc=? where channel =?',[msg])
         c.execute('update signup set message=? where channel_id =? and username=?',update_tuple)
 
         connection.commit()
@@ -201,10 +166,6 @@ def event_time(channel_id,message):
       if exists is not None:
         print("Modify Trial Time")
         update_tuple=(msg,channel_id)
-        #sql_update="""update trials set trial_desc=?;"""
-        #update_tuple=[message]
-        #c.execute(sql_update, update_tuple)
-        #c.execute('update trials set trial_time=? where channel =?',[msg])
         c.execute('update trials set trial_time=? where channel =?',update_tuple)
         
         connection.commit()
@@ -230,11 +191,9 @@ def read_roles():
       records = c.fetchall()
       print("Total rows are:  ", len(records))
       print("Printing each row")
-      #emoji=get(ctx.message.guild.emojis, name='crossed_swords')
       myEmbed = discord.Embed(title="Default Role Assignment", description='☠️', color=0xFF5733)
       names = ''
       roles = ''
-      #messages = ''
       for x in records:
         names += x[0] + '\n'
         if x[1] =='DPS':
@@ -245,7 +204,6 @@ def read_roles():
           roles += '🛡️' + '\n'
         if x[1] =='ALT':
           roles += '🎲' + '\n'
-        #messages += x[5] + '\n'
       myEmbed.add_field(name='Username', value=names, inline=True)
       myEmbed.add_field(name='Roles', value=roles, inline=True)
       c.close()
@@ -372,7 +330,7 @@ def add_event(channel_name,channel_id,owner):
       sql_query="""select * from trials where channel_id=?"""
       read_tuple=[channel_id]
       c.execute(sql_query,read_tuple)
-      # c.execute('SELECT channel_id from trials where channel_id =?',[channel_id])
+
       exists= c.fetchone()
       print(exists)
       #Use this to update an existing user with a new role.
@@ -479,12 +437,10 @@ def delete_signup(channel_id,username,guild_id,channel):
       print("Connected to SQLite")
 
       sql_delete="""DELETE FROM signup where channel_id=? and username=? and guild_id=? and channel=? """
-      # sql_delete="""DELETE FROM signup"""
 
       data_tuple =(channel_id,username,guild_id,channel)
       c.execute(sql_delete,data_tuple)
 
-      # c.execute(sql_delete)
       connection.commit()
       print("Record deletion successful.")
 
@@ -505,12 +461,9 @@ def nuke_signup():
       print("Connected to delete all events")
 
       sql_delete="""DELETE FROM signup"""
-      # sql_delete="""DELETE FROM signup"""
 
-      #data_tuple =(channel_id,username,guild_id,channel)
       c.execute(sql_delete)#,data_tuple)
 
-      # c.execute(sql_delete)
       connection.commit()
       print("Record deletion successful.")
 
@@ -531,12 +484,9 @@ def nuke_event():
       print("Connected to delete all events")
 
       sql_delete="""DELETE FROM trials"""
-      # sql_delete="""DELETE FROM signup"""
 
-      #data_tuple =(channel_id,username,guild_id,channel)
       c.execute(sql_delete)#,data_tuple)
 
-      # c.execute(sql_delete)
       connection.commit()
       print("Record deletion successful.")
 
