@@ -27,53 +27,6 @@ async def showtrial(ctx):
     #await ctx.send(f"A new channel called {channel_name} was made")
     await ctx.channel.send(embed=myEmbed)
 
-
-#deploy note
-#event wizard
-# @bot.command(name="event")
-# async def event(ctx):
-#     await ctx.send(f"Enter Channel Name")
-#     channel_id=str(ctx.channel.id)
-
-#     # This will make sure that the response will only be registered if the following
-#     # conditions are met:
-#     def check(msg):
-#         return msg.author == ctx.author and msg.channel == ctx.channel #and \
-#         #msg.content.lower() in ["y", "n"]
-
-#     msg = await bot.wait_for("message", check=check)
-
-#     msg_send=msg.content
-#     #if msg.content.lower() == "y":
-#     datatransaction.add_event(msg_send)
-
-#     await ctx.send(f"Enter event information.")
-#     channel_id=str(ctx.channel.id)
-
-#     def check(msg):
-#         return msg.author == ctx.author and msg.channel == ctx.channel #and \
-#         #msg.content.lower() in ["y", "n"]
-
-#     msg = await bot.wait_for("message", check=check)
-#     msg_send=msg.content
-#     #if msg.content.lower() == "y":
-#     datatransaction.event_info(channel_id,msg_send)
-
-#     await ctx.send(f"Enter event time.")
-#     channel_id=str(ctx.channel.id)
-
-#     # This will make sure that the response will only be registered if the following
-#     # conditions are met:
-#     def check(msg):
-#         return msg.author == ctx.author and msg.channel == ctx.channel #and \
-#         #msg.content.lower() in ["y", "n"]
-
-#     msg = await bot.wait_for("message", check=check)
-#     msg_send=msg.content
-#     #if msg.content.lower() == "y":
-#     datatransaction.event_time(channel_id,msg_send)
-
-
 #Create Trial Channel
 @bot.command(name='add_event', description="Create a new channel for a trial")
 @commands.guild_only()
