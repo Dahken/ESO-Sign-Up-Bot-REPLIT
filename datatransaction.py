@@ -248,12 +248,6 @@ def read_roles():
         #messages += x[5] + '\n'
       myEmbed.add_field(name='Username', value=names, inline=True)
       myEmbed.add_field(name='Roles', value=roles, inline=True)
-      # for row in records:
-      #     myEmbed.add_field(name="Username: ", value=row[0], inline= False)
-      #     myEmbed.add_field(name="Role: ", value=row[1], inline= False)
-      #     print(row[0])
-      #     print(row[1])
-      #     print("\n")
       c.close()
       return myEmbed
       connection.close()
@@ -312,26 +306,6 @@ def query_limit_count(channel_id, role):
         return row[7]
       connection.close()
       
-      # query_tuple=[role, channel_id]
-      # if role =='DPS':
-      #   #sql_query="""select DPS from trial where channel_id=? and role=?"""
-      #   c.execute('select DPS from trials where channel_id=?',[channel_id])
-      # if role=='TANK':
-      #   #sql_query="""select TANK from trial where channel_id=? and role=?"""
-      #   c.execute('select TANK from trials where channel_id=?',[channel_id])
-      # if role== 'HEALER':
-      #   #sql_query="""select HEALER from trial where channel_id=? and role=?"""
-      #   c.execute('select HEALER from trials where channel_id=?',[channel_id])
-      # # sql_query="""select ? from trials where channel_id=?"""
-      # # c.execute(sql_query,query_tuple)
-      # c.execute('Select * from trials where channel_id=936360321403224084')
-      # query_result = c.fetchone()[0]
-      # print(query_result)
-      # #query_result = int(query_result)
-      # print(query_result)
-      # c.close()
-      # return query_result
-      # connection.close()
     
     except connection.Error as error:
         print("Failed to read data from sqlite table", error)
@@ -360,44 +334,6 @@ def user_role(username):
             connection.close()
             print("The SQLite connection is closed")
 
-# def read_event(channel_id):
-#     try:
-#       connection = sqlite3.connect("database.db")
-#       c = connection.cursor()
-#       print("Connected to SQLite for trial add")
-#       #sql_query="""select * from trials"""
-#       c.execute('select * from trials where channel=?',[channel_id])
-#       records=c.fetchall()
-#       myEmbed = discord.Embed(title="Trial Information", description='☠️', color=0xFF5733)
-#       for row in records:
-#           myEmbed.add_field(name="Channel ID: ", value=row[0], inline= False)
-#           myEmbed.add_field(name="Channel: ", value=row[1], inline= False)
-#           myEmbed.add_field(name="Owner: ", value=row[2], inline= False)
-#           myEmbed.add_field(name="Trial Time: ", value=row[3], inline= False)
-#           myEmbed.add_field(name="Trial Desc: ", value=row[4], inline= False)
-#           myEmbed.add_field(name="Max Tanks: ", value=row[5], inline= False)
-#           myEmbed.add_field(name="Max Healers: ", value=row[6], inline= False)
-#           myEmbed.add_field(name="Max DPS: ", value=row[7], inline= False)
-#           # print(row[0])
-#           # print(row[1])
-#           # print(row[2])
-#           # print(row[3])
-#           # print(row[4])
-#           # print(row[5])
-#           # print(row[6])
-#           # print(row[7])
-#           # print("\n")
-#       connection.close()
-#       return(myEmbed)
-    
-#     except connection.Error as error:
-#         print("Failed to insert Python variable into sqlite table", error)
-#         return 2
-    
-#     finally:
-#         if connection:
-#             connection.close()
-#             print("The SQLite connection is closed")
 def read_event(channel_id):
     try:
       connection = sqlite3.connect("database.db")
@@ -416,15 +352,6 @@ def read_event(channel_id):
           # myEmbed.add_field(name="Max Tanks: ", value=row[5], inline= False)
           # myEmbed.add_field(name="Max Healers: ", value=row[6], inline= False)
           # myEmbed.add_field(name="Max DPS: ", value=row[7], inline= False)
-          # print(row[0])
-          # print(row[1])
-          # print(row[2])
-          # print(row[3])
-          # print(row[4])
-          # print(row[5])
-          # print(row[6])
-          # print(row[7])
-          # print("\n")
       connection.close()
       return(myEmbed)
     
