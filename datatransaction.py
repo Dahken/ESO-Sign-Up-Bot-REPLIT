@@ -27,23 +27,23 @@ def read_roster(channel_id):
           row=''
           names = x[2] + ' '
           row+= names
-          if x[6] =='DPS':
+          if x[7] =='DPS':
             roles= str('⚔️') + ' '
             row += roles
-          if x[6] =='HEALER':
+          if x[7] =='HEALER':
             roles = str('🚑') + ' '
             row += roles
-          if x[6] =='TANK':
+          if x[7] =='TANK':
             roles = str('🛡️') + ' '
             row += roles
-          if x[6] =='ALT':
+          if x[7] =='ALT':
             roles = str('🎲') + ' '
             row += roles
-          if x[7] is None:
+          if x[8] is None:
             messages = '-'  + '\n '
             row += messages
-          if x[7] is not None:
-            messages = x[7] + ' '
+          if x[8] is not None:
+            messages = x[8] + ' '
             row += messages +'\n'
           slug+=row
           print(x[0])
@@ -398,7 +398,7 @@ def role_assign(username,role):
             print("The SQLite connection is closed")
 
 
-def signup_data(channel_id,username,guild_id,channel,joining,role):
+def signup_data(channel_id,username,user_id,guild_id,channel,joining,role):
     try:
       connection = sqlite3.connect("database.db")
       c = connection.cursor()
@@ -412,8 +412,8 @@ def signup_data(channel_id,username,guild_id,channel,joining,role):
           return 1
       if exists is None:
         print("No Entry")
-        sql_insert="""INSERT INTO signup (channel_id,username,guild_id,channel,joining,role) VALUES(?,?,?,?,?,?);"""
-        data_tuple =(channel_id,username,guild_id,channel,joining,role)
+        sql_insert="""INSERT INTO signup (channel_id,username,user_id,guild_id,channel,joining,role) VALUES(?,?,?,?,?,?,?);"""
+        data_tuple =(channel_id,username,user_id,guild_id,channel,joining,role)
         c.execute(sql_insert, data_tuple)
         connection.commit()
         print("Record insert successful.")

@@ -6,6 +6,7 @@ import datastructure
 import datatransaction
 import sqlite3
 import datetime
+import asyncio
 
 bot = commands.Bot(command_prefix="*", case_insensitive=True)
 bot.author_id = 533777500699099156  # Change to your discord id!!!
@@ -16,6 +17,34 @@ async def on_ready():  # When the bot is ready
     print("I'm in")
     print(bot.user)  # Prints the bot's username and identifier
 
+@bot.command(name='DM',
+             description="Send DMs")
+async def DM(ctx,member:discord.Member,*,content):
+  await member.send(content)
+# async def DM(ctx):
+#     players = []
+#     message = await ctx.send("Message")
+#     await message.add_reaction('✅')
+#     await asyncio.sleep(10)
+#     client = discord.Client()
+#     message = await ctx.fetch_message(message.id)
+
+#     for reaction in message.reactions:
+#         if reaction.emoji == '✅':
+#             async for user in reaction.users():
+#                 # if user != client.user:
+#                     players.append(user.mention)
+
+#     if len(players) < 1:
+#         await ctx.send('Time is up, and not enough players')
+#     else:
+#         await ctx.send(players)
+
+#     user = await client.fetch_user("533777500699099156")
+#     await user.send("Hello there!")
+
+#     # user=await client.get_user_info("533777500699099156")
+#     # await client.send_message(user, "Your message goes here")
 
 #Show Trial Info for Channel
 @bot.command(name='show_event',
@@ -190,6 +219,7 @@ async def msg(ctx):
 @commands.guild_only()
 async def su(ctx, *role):
     username = str(ctx.author).split('#')[0]
+    user_id = ctx.author.id
     guild = str(ctx.guild).split('#')[0]
     #user_message=str(ctx.content)
     channel = str(ctx.channel.name)
@@ -218,14 +248,14 @@ async def su(ctx, *role):
         print(role)
         if enrolled_count < limit_count:
             #await ctx.author.send("There was an open spot")
-            response = datatransaction.signup_data(channel_id, username, guild,
+            response = datatransaction.signup_data(channel_id, username,user_id, guild,
                                                    channel, date_object, role)
         else:
             #await ctx.author.send("Role Full")
             response = 3
 
     if role == 'ALT':
-        response = datatransaction.signup_data(channel_id, username, guild,
+        response = datatransaction.signup_data(channel_id, username,user_id, guild,
                                                channel, date_object, role)
 
     if response == 0:

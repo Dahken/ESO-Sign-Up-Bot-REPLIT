@@ -8,6 +8,7 @@ try:
     signup_id integer primary key AUTOINCREMENT,
     channel_id INTEGER,
     username VARCHAR(50),
+    user_id VARCHAR(50),
     guild_id VARCHAR(50),
     channel VARCHAR(50),
     joining DATE,
