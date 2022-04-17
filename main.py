@@ -19,7 +19,7 @@ async def on_ready():  # When the bot is ready
 
 @bot.command(name='DM',
              description="Send DMs")
-async def DM(ctx,member:discord.Member,*,content):
+async def DM(ctx,member:discord.Member.id,*,content):
   await member.send(content)
 # async def DM(ctx):
 #     players = []
