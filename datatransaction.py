@@ -23,6 +23,14 @@ def read_roster(channel_id):
         messages = ''
         row = ''
         slug=''
+        tank_enrolled_count = datatransaction.query_role_count(channel_id, 'TANK')
+        tank_limit_count = datatransaction.query_limit_count(channel_id, 'TANK')
+        healer_enrolled_count = datatransaction.query_role_count(channel_id, 'HEALER')
+        healer_limit_count = datatransaction.query_limit_count(channel_id, 'HEALER')
+        dps_enrolled_count = datatransaction.query_role_count(channel_id, 'DPS')
+        dps_limit_count = datatransaction.query_limit_count(channel_id, 'DPS')
+        alt_enrolled_count = datatransaction.query_role_count(channel_id, 'ALT')
+        
         for x in records:
           row=''
           names = x[2] + ' '
@@ -54,6 +62,10 @@ def read_roster(channel_id):
           print(x[5])
           print(x[6])
           print(x[7])
+        slug+=tank_enrolled_count +' ' +tank_limit_count
+        slug+=healer_enrolled_count +' ' +healer_limit_count
+        slug+=dps_enrolled_count +' ' +dps_limit_count
+        slug+=alt_enrolled_count +' '
         myEmbed.add_field(name='\u200b', value=slug, inline=False)
       c.close()
       return myEmbed
