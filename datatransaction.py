@@ -54,8 +54,8 @@ def read_roster(channel_id):
                     roles = str('🎲') + ' '
                     row += roles
                 if x[8] is None:
-                    messages = '-' + '\n '
-                    row += messages
+                    messages = '\u200b' #+ '\n '
+                    row += messages +'\n'
                 if x[8] is not None:
                     messages = x[8] + ' '
                     row += messages + '\n'
@@ -68,13 +68,17 @@ def read_roster(channel_id):
                 print(x[5])
                 print(x[6])
                 print(x[7])
+            #slug += '\n'
+            slug += 'Role Count:' + '\n'
             slug += 'TANKS' + ' ' + str(tank_enrolled_count) + '/' + str(
                 tank_limit_count) + '\n'
             slug += 'HEALERS' + ' ' + str(healer_enrolled_count) + '/' + str(
                 healer_limit_count) + '\n'
             slug += 'DPS' +' ' + str(dps_enrolled_count) + '/' + str(
                 dps_limit_count) + '\n'
-            slug += 'ALTS' + ' ' + str(alt_enrolled_count)
+            slug += 'ALTS' + ' ' + str(alt_enrolled_count)+ '\n'
+            slug += 'Total Count:' + '\n'
+            slug += str(tank_enrolled_count + healer_enrolled_count + dps_enrolled_count) +'/' +str(tank_limit_count+healer_limit_count+dps_limit_count) + ' '+ '+' + str(alt_enrolled_count)+ '\n'
             myEmbed.add_field(name='\u200b', value=slug, inline=False)
         c.close()
         return myEmbed
