@@ -6,6 +6,9 @@ import datastructure
 import datatransaction
 import sqlite3
 import datetime
+import asyncio
+
+#Deploy Count 4
 
 bot = commands.Bot(command_prefix="*", case_insensitive=True)
 bot.author_id = 533777500699099156  # Change to your discord id!!!
@@ -15,7 +18,6 @@ bot.author_id = 533777500699099156  # Change to your discord id!!!
 async def on_ready():  # When the bot is ready
     print("I'm in")
     print(bot.user)  # Prints the bot's username and identifier
-
 
 #Show Trial Info for Channel
 @bot.command(name='show_event',
@@ -190,6 +192,7 @@ async def msg(ctx):
 @commands.guild_only()
 async def su(ctx, *role):
     username = str(ctx.author).split('#')[0]
+    user_id = ctx.author.id
     guild = str(ctx.guild).split('#')[0]
     #user_message=str(ctx.content)
     channel = str(ctx.channel.name)
@@ -218,14 +221,14 @@ async def su(ctx, *role):
         print(role)
         if enrolled_count < limit_count:
             #await ctx.author.send("There was an open spot")
-            response = datatransaction.signup_data(channel_id, username, guild,
+            response = datatransaction.signup_data(channel_id, username,user_id, guild,
                                                    channel, date_object, role)
         else:
             #await ctx.author.send("Role Full")
             response = 3
 
     if role == 'ALT':
-        response = datatransaction.signup_data(channel_id, username, guild,
+        response = datatransaction.signup_data(channel_id, username,user_id, guild,
                                                channel, date_object, role)
 
     if response == 0:
